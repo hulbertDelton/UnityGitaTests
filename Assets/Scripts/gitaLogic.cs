@@ -75,14 +75,24 @@ public class GitaLogic : MonoBehaviour {
         wheelAxle.transform.Rotate(leftWheel.rpm / 60 * 360 * Time.deltaTime, 0, 0);
     }
 
+    private float ChooseSpeed() {
+        Vector3 veloc = transform.GetComponent<Rigidbody>().velocity;
+        float speed = veloc.magnitude;
+
+
+        return speed;
+    }
     //gets input and applies torque to the wheels
     private void GetMotorInput() {
         float motor = maxMotorTorque * Input.GetAxis("Vertical");
         float turnDirection = Input.GetAxis("Horizontal");
 
-
+        //TODO make a motion selection UI item that switches between movement systems
+        //TODO make a "carrot" movement system, where gita chases a carrot
+        //TODO make a "spline" movement system, where gia follows a set path
         //TODO make a torque curve that applies a lot of torque when at a standstill, then reduces to maintain speed when desired speed is reached.
         //TODO make vertical mouse input dictate desired speed
+         
         if (Input.GetAxis("Horizontal") < 0.01f && Input.GetAxis("Horizontal") > -0.01f) {
             turnDirection = 0;
         }
