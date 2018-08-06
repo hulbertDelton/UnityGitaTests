@@ -1175,7 +1175,6 @@ GameObject:
   - component: {fileID: 534669904}
   - component: {fileID: 534669903}
   - component: {fileID: 534669907}
-  - component: {fileID: 534669906}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: Untagged
@@ -1243,23 +1242,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 27.553001, y: 46.980003, z: 0.94500005}
---- !u!114 &534669906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 534669902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92cc86dccaea26a4bbe0c1d62820a9ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 1662854772}
-  speed: 2
-  xOffset: 0
-  yOffset: 12
-  zOffset: -4
-  rotationSpeed: 2
 --- !u!114 &534669907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1880,12 +1862,12 @@ GameObject:
   - component: {fileID: 913149831}
   - component: {fileID: 913149830}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: centerMassSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!23 &913149830
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2704,7 +2686,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4955112981459362, guid: f9741df0398e09c4ba0dc0cf7e880a28, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -218.35223
+      value: -218.49
       objectReference: {fileID: 0}
     - target: {fileID: 4955112981459362, guid: f9741df0398e09c4ba0dc0cf7e880a28, type: 2}
       propertyPath: m_LocalRotation.x
@@ -9138,6 +9120,21 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 6ff67465b22790a418bfd9f5c328d130,
     type: 3}
   m_PrefabInternal: {fileID: 217773396}
+--- !u!114 &1662854773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1662854766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92cc86dccaea26a4bbe0c1d62820a9ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  height: 4
+  followDistance: -5
+  risingSpeed: 3
+  cam: {fileID: 534669905}
 --- !u!1 &1666917212
 GameObject:
   m_ObjectHideFlags: 0
@@ -9810,7 +9807,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4955112981459362, guid: f9741df0398e09c4ba0dc0cf7e880a28, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -237.75223
+      value: -237.89
       objectReference: {fileID: 0}
     - target: {fileID: 4955112981459362, guid: f9741df0398e09c4ba0dc0cf7e880a28, type: 2}
       propertyPath: m_LocalRotation.x

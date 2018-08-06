@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class gitaLogic : MonoBehaviour {
+public class GitaLogic : MonoBehaviour {
 
     [Header("------------Editable variables------------")]
     [Range(0f, 650f)]
