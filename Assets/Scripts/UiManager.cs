@@ -16,7 +16,7 @@ public class UiManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        speedText.text = Mathf.Round(gitaLog.rightWheel.motorTorque * 10) / 10 + " m/s";
+        speedText.text = Mathf.Round(gitaLog.speed * 10) / 10 + " m/s";
         torqueText.text = Mathf.Round(gitaLog.rightWheel.motorTorque * 10) / 10 + " N⋅m";
 	}
 }

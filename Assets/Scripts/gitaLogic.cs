@@ -17,6 +17,7 @@ public class GitaLogic : MonoBehaviour {
     public WheelCollider rightWheel;
     public GameObject CenterMassSphere;
 
+    public float speed;
     private Vector3 wheelsPosition;
     private Vector3 defaultAxlePosition;
     private Vector3 defaultWheelLPosition;
@@ -48,6 +49,7 @@ public class GitaLogic : MonoBehaviour {
 
         GetMotorInput();
         DisplaceWheels();
+        ChooseSpeed();
     }
 
     //moves the wheels to always be under the chassis
@@ -77,7 +79,7 @@ public class GitaLogic : MonoBehaviour {
 
     private float ChooseSpeed() {
         Vector3 veloc = transform.GetComponent<Rigidbody>().velocity;
-        float speed = veloc.magnitude;
+        speed = veloc.magnitude;
 
 
         return speed;
