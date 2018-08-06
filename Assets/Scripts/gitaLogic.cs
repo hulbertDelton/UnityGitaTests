@@ -26,7 +26,6 @@ public class GitaLogic : MonoBehaviour {
     private Rigidbody rigBody;
     private float wheelOffset;
 
-    //--------------------------------------------------------------------------------------------------------------------
     void Start() {
         rigBody = GetComponent<Rigidbody>();
         rigBody.centerOfMass = new Vector3(0, 1f, 1.03f);
@@ -36,8 +35,7 @@ public class GitaLogic : MonoBehaviour {
         defaultWheelLPosition = leftWheel.center;
         defaultWheelRPosition = rightWheel.center;
     }
-
-    //--------------------------------------------------------------------------------------------------------------------
+    
     private void FixedUpdate() {
         CenterMassSphere.transform.localPosition = rigBody.centerOfMass;
         rigBody.centerOfMass = new Vector3(0, CenterOfMassY, CenterOfMassZ);
@@ -48,29 +46,22 @@ public class GitaLogic : MonoBehaviour {
             wheelsPosition.y = 0;
         }
 
-        //new Motor input
-        float motor = maxMotorTorque * Input.GetAxis("Vertical");
-        float turnDirection = Input.GetAxis("Horizontal");
+        GetMotorInput();
+        DisplaceWheels();
+    }
 
-        if (Input.GetAxis("Horizontal") < 0.01f && Input.GetAxis("Horizontal") > -0.01f) {
-            turnDirection = 0;
-        }
-
-        if (turnDirection != 0) {
-            motorL = maxMotorTorque * -turnDirection;
-            motorR = maxMotorTorque * turnDirection;
-        } else {
-            motorL = motor;
-            motorR = motor;
-        }
-
-        //wheel displacement
-        Quaternion bodyTilt = new Quaternion (transform.localEulerAngles.x, transform.localEulerAngles.y, transform.localEulerAngles.z, Quaternion.identity.w);
+    //moves the wheels to always be under the chassis
+    private void DisplaceWheels() { 
+        Quaternion bodyTilt = new Quaternion(transform.localEulerAngles.x, transform.localEulerAngles.y, transform.localEulerAngles.z, Quaternion.identity.w);
         if (bodyTilt.x > 60) {
             wheelOffset = 360 - bodyTilt.x;
         } else {
             wheelOffset = -bodyTilt.x;
         }
+
+        //TODO Damp rocking, it's extreme and unreasonable
+        //TODO Reduce body tilt somehow
+
         wheelOffset = Mathf.Clamp(wheelOffset, -offsetMaximum, offsetMaximum);
         wheelsPosition.z = wheelOffset;
 
@@ -82,5 +73,26 @@ public class GitaLogic : MonoBehaviour {
         rightWheel.motorTorque = motorR;
 
         wheelAxle.transform.Rotate(leftWheel.rpm / 60 * 360 * Time.deltaTime, 0, 0);
+    }
+
+    //gets input and applies torque to the wheels
+    private void GetMotorInput() {
+        float motor = maxMotorTorque * Input.GetAxis("Vertical");
+        float turnDirection = Input.GetAxis("Horizontal");
+
+
+        //TODO make a torque curve that applies a lot of torque when at a standstill, then reduces to maintain speed when desired speed is reached.
+        //TODO make vertical mouse input dictate desired speed
+        if (Input.GetAxis("Horizontal") < 0.01f && Input.GetAxis("Horizontal") > -0.01f) {
+            turnDirection = 0;
+        }
+
+        if (turnDirection != 0) {
+            motorL = maxMotorTorque * -turnDirection;
+            motorR = maxMotorTorque * turnDirection;
+        } else {
+            motorL = motor;
+            motorR = motor;
+        }
     }
 }
