@@ -98,9 +98,9 @@ public class GitaLogic : MonoBehaviour {
         
         float speedCalc = 0;
         if (uiManager.barMover != 0) {
-            speedCalc = uiManager.barMover / uiManager.barMover;
+            speedCalc = uiManager.barMover / 720;
         } else speedCalc = 0;
-
+        
         float motor = maxMotorTorque * Input.GetAxis("Vertical") * speedCalc;
 
         if (Input.GetAxis("Horizontal") < 0.01f && Input.GetAxis("Horizontal") > -0.01f) {
@@ -108,8 +108,8 @@ public class GitaLogic : MonoBehaviour {
         }
         
         if (turnDirection != 0) {
-            motorL = motor * -turnDirection;
-            motorR = motor * turnDirection;
+            motorL = maxMotorTorque * -turnDirection;
+            motorR = maxMotorTorque * turnDirection;
         } else {
             motorL = motor;
             motorR = motor;
