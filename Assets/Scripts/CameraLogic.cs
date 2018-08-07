@@ -26,7 +26,13 @@ public class CameraLogic : MonoBehaviour {
         var currentRotation = Quaternion.Euler(0, currentRotationAngle, 0);
         transform.rotation = currentRotation;
         transform.position += currentRotation * Vector3.forward * zOffset;
-    }    //delton's attempt at mouse control    //public float height = 4.0f;
+    }
+
+
+
+    //delton's attempt at mouse control
+
+    //public float height = 4.0f;
     //private float heightGoal;
     //public float followDistance = 3.0f;
     //public float risingSpeed = 2.0f;

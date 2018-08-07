@@ -16,6 +16,7 @@ public class GitaLogic : MonoBehaviour {
     public WheelCollider leftWheel;
     public WheelCollider rightWheel;
     public GameObject CenterMassSphere;
+    public UiManager uiManager;
 
     public float speed;
     private Vector3 wheelsPosition;
@@ -78,30 +79,37 @@ public class GitaLogic : MonoBehaviour {
     }
 
     private float ChooseSpeed() {
+
+        //TODO make vertical mouse input dictate desired speed
         Vector3 veloc = transform.GetComponent<Rigidbody>().velocity;
         speed = veloc.magnitude;
-
 
         return speed;
     }
     //gets input and applies torque to the wheels
     private void GetMotorInput() {
-        float motor = maxMotorTorque * Input.GetAxis("Vertical");
         float turnDirection = Input.GetAxis("Horizontal");
 
         //TODO make a motion selection UI item that switches between movement systems
         //TODO make a "carrot" movement system, where gita chases a carrot
         //TODO make a "spline" movement system, where gia follows a set path
+
         //TODO make a torque curve that applies a lot of torque when at a standstill, then reduces to maintain speed when desired speed is reached.
-        //TODO make vertical mouse input dictate desired speed
-         
+        
+        float speedCalc = 0;
+        if (uiManager.barMover != 0) {
+            speedCalc = uiManager.barMover / uiManager.barMover;
+        } else speedCalc = 0;
+
+        float motor = maxMotorTorque * Input.GetAxis("Vertical") * speedCalc;
+
         if (Input.GetAxis("Horizontal") < 0.01f && Input.GetAxis("Horizontal") > -0.01f) {
             turnDirection = 0;
         }
-
+        
         if (turnDirection != 0) {
-            motorL = maxMotorTorque * -turnDirection;
-            motorR = maxMotorTorque * turnDirection;
+            motorL = motor * -turnDirection;
+            motorR = motor * turnDirection;
         } else {
             motorL = motor;
             motorR = motor;
