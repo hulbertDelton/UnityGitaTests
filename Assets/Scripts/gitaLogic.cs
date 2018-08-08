@@ -48,9 +48,9 @@ public class GitaLogic : MonoBehaviour {
             wheelsPosition.y = 0;
         }
 
+        ChooseSpeed();
         GetMotorInput();
         DisplaceWheels();
-        ChooseSpeed();
     }
 
     //moves the wheels to always be under the chassis
@@ -93,8 +93,6 @@ public class GitaLogic : MonoBehaviour {
         //TODO make a motion selection UI item that switches between movement systems
         //TODO make a "carrot" movement system, where gita chases a carrot
         //TODO make a "spline" movement system, where gia follows a set path
-
-        //TODO make a torque curve that applies a lot of torque when at a standstill, then reduces to maintain speed when desired speed is reached.
         
         float speedCalc = 0;
         if (uiManager.barMover != 0) {
@@ -114,5 +112,13 @@ public class GitaLogic : MonoBehaviour {
             motorL = motor;
             motorR = motor;
         }
+    }
+
+    private void TorqueCurve() {
+        //TODO make a torque curve that applies a lot of torque when at a standstill, then reduces to maintain speed when desired speed is reached.
+            //make sure to delete the mouse control from speedChoose. Maybe delete the whole function
+            //allow user to determine the "curve" with some interface values: value (vertical) and location (horizontal)
+            // when no input is given, maintain current speed
+            // add SPACEBAR to stop. reduce torque to 0
     }
 }
